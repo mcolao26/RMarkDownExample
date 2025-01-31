@@ -1,0 +1,96 @@
+---
+title: "My First Markdown"
+author: "Matthew Colao"
+date: "2025-01-30"
+output: html_document
+---
+
+```{r}
+# Our Data
+Name <- c("Ronak","Sam","Joe","Mary","Jane","Sally")
+Age <- c(21,24,20,15,19,22)
+Gender <- c("M","M","M","F","F","F")
+GPA <- c(3.7,2.9,3.1,4.0,3.4,3.5)
+myDataFrame <- data.frame(Name,Age,Gender,GPA)
+myDataFrame
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r }
+# Exploring the Data
+names(myDataFrame)
+ncol(myDataFrame)
+nrow(myDataFrame)
+dim(myDataFrame)
+head(myDataFrame)
+tail(myDataFrame)
+str(myDataFrame)
+class(myDataFrame$Gender)
+myDataFrame$Gender <- as.factor(myDataFrame$Gender)
+class(myDataFrame$Gender)
+str(myDataFrame)
+# Column
+myDataFrame$Age
+myDataFrame[2]
+myDataFrame[c("Age")]
+myDataFrame[2:3]
+myDataFrame[c("Age","Gender")]
+# Rows
+myDataFrame[2,]
+# Combined
+myDataFrame[2:3,c("Age")]
+myDataFrame[2:3,2:3]
+#Levels
+myDataFrame$Gender
+table(myDataFrame$Gender)
+table(myDataFrame$Age)
+table(myDataFrame$Age, myDataFrame$Gender)
+# Filtering
+myDataFrame[myDataFrame$Gender == 'M',] 
+# Ordering
+myDataFrame[order(myDataFrame$Age),]
+myDataFrame[order(-myDataFrame$Age),]
+# Change Column Name
+names(myDataFrame)[4] <- "Grade"
+head(myDataFrame)
+names(myDataFrame)[4] <- "GPA"
+head(myDataFrame)
+
+# Changing Age for Ronak
+myDataFrame [1,2] <- 31
+head(myDataFrame)
+```
+
+
+```{r }
+myDataFrame$Age[1] <- 33
+head(myDataFrame)
+
+Typical_Employee_Survey_Data <- read.csv("/Users/mattcolao/Downloads/Typical_Employee_Survey_Data.csv", header = FALSE)
+str(Typical_Employee_Survey_Data)
+```
+
+## Here are some plots
+
+You can also embed plots, for example:
+
+```{r }
+library(tidyverse)
+library(modeldata)
+view(crickets)
+?crickets
+
+ggplot(crickets, aes(x = temp,
+                     y = rate,
+                     color = species)) + 
+    geom_point() +
+  labs(x = 'Temperature', y = 'Rate of Chirps', color = 'Cricket Species') +
+  scale_color_brewer(palette = 'Dark2')
+```
+
+
